@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        #qrcode {
+            margin-top: 15px;
+        }
+        #urlDisplay {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="urlInput" placeholder="Enter a URL">
+    <button onclick="generateQRCode()">Generate QR Code</button>
+    <div id="qrcode"></div>
+    <div id="urlDisplay"></div> <!-- Placeholder for displaying the URL -->
+
+    <script>
+        function generateQRCode() {
+            var url = document.getElementById('urlInput').value;
+            if(url) {
+                // Display the URL below the QR code
+                document.getElementById('urlDisplay').textContent = 'URL: ' + url;
+                
+                QRCode.toCanvas(document.getElementById('qrcode'), url, function (error) {
+                    if (error) console.error(error);
+                    console.log('Success!');
+                });
+            } else {
+                alert('Please enter a URL');
+            }
+        }
+    </script>
+</body>
+</html>
